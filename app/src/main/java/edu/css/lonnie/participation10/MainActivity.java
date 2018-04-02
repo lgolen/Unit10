@@ -7,15 +7,16 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 public class MainActivity extends ListActivity {
     private CommentsDataSource datasource;
-
+    private EditText etRating;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        etRating = (EditText) findViewById(R.id.rating);
         datasource = new CommentsDataSource(this);
         datasource.open();
 
@@ -34,12 +35,13 @@ public class MainActivity extends ListActivity {
         @SuppressWarnings("unchecked")
         ArrayAdapter<Comment> adapter = (ArrayAdapter<Comment>) getListAdapter();
         Comment comment = null;
+        String rating = etRating.getText().toString();
         switch (view.getId()) {
             case R.id.add:
                 String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
                 int nextInt = new Random().nextInt(3);
                 // save the new comment to the database
-                comment = datasource.createComment(comments[nextInt]);
+                comment = datasource.createComment(comments[nextInt], rating);
                 adapter.add(comment);
                 break;
             case R.id.delete:

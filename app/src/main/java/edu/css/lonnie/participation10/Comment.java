@@ -7,6 +7,7 @@ public class Comment {
     // a Comment consists of the ID and a string containing the comment
     private long id;
     private String comment;
+    private String rating;
 
     // returns the ID of the comment instance
     public long getId() {
@@ -28,10 +29,20 @@ public class Comment {
         this.comment = comment;
     }
 
+    // returns the rating
+    public String getRating() {
+        return rating;
+    }
+
+    // sets the rating value
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     // Will be used by the ArrayAdapter in the ListView
     // Override the toString() method to return the comment private variable
     @Override
     public String toString() {
-        return comment;
+        return "Comment: " + comment + ", Rating: " + rating;
     }
 }
